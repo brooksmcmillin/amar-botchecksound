@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Botcheck Sound
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Play a sound when the botcheck comes up.
+// @version      0.2
+// @description  Play a sound when the botcheck comes up. Also plays sound when running out of mana.
 // @match        http://amar.bornofsnails.net/index.php
 // @grant        none
 // ==/UserScript==
@@ -20,6 +20,10 @@ var onStartActionOriginal = Utils.onStartAction;
 Utils.onStartAction = function(data)
 {
     onStartActionOriginal(data);
-    if(data["botcheck"])
+    
+    if(data["botcheck"]){
         playCustomSound();
+    } else if (data.message == "You need mana to continue."){ 
+        playCustomSound();
+    }
 };
