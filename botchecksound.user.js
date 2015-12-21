@@ -25,7 +25,9 @@ Utils.onStartAction = function(data)
         playCustomSound();
     } else if (data.custom){
         playCustomSound();
-    } else if (data.message == "You need mana to continue."){ 
+    } else if (data.message && data.message.indexOf("You need mana to continue.") > -1){
+        playCustomSound();
+    } else if (data.message && data.message.indexOf("You reached your action limit.") > -1){
         playCustomSound();
     }
 }
