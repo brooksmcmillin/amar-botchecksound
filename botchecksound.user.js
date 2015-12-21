@@ -13,7 +13,7 @@ function playCustomSound()
 {
     var customAudio = new Audio("http://amar.brooksmcmillin.com/sound.mp3");
     customAudio.play();
-};
+}
 
 var onStartActionOriginal = Utils.onStartAction;
 
@@ -26,4 +26,4 @@ Utils.onStartAction = function(data)
     } else if (data.message == "You need mana to continue."){ 
         playCustomSound();
     }
-};
+}
