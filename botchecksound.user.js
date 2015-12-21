@@ -13,7 +13,7 @@ function playCustomSound()
 {
     var customAudio = new Audio("http://amar.brooksmcmillin.com/sound.mp3");
     customAudio.play();
-};
+}
 
 var onStartActionOriginal = Utils.onStartAction;
 
@@ -23,7 +23,11 @@ Utils.onStartAction = function(data)
     
     if(data["botcheck"]){
         playCustomSound();
-    } else if (data.message == "You need mana to continue."){ 
+    } else if (data.custom){
+        playCustomSound();
+    } else if (data.message && data.message.indexOf("You need mana to continue.") > -1){
+        playCustomSound();
+    } else if (data.message && data.message.indexOf("You reached your action limit.") > -1){
         playCustomSound();
     }
-};
+}
