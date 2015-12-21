@@ -23,6 +23,8 @@ Utils.onStartAction = function(data)
     
     if(data["botcheck"]){
         playCustomSound();
+    } else if (data.custom){
+        playCustomSound();
     } else if (data.message == "You need mana to continue."){ 
         playCustomSound();
     }
