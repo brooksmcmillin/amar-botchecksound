@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  Play a sound when the botcheck comes up. Also plays sound when running out of mana.
-// @match        http://amar.bornofsnails.net/index.php
+// @match        http://amar.bornofsnails.net
 // @grant        none
 // ==/UserScript==
 /* jshint -W097 */
