@@ -1,33 +1,46 @@
 // ==UserScript==
 // @name         Botcheck Sound
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.4
 // @description  Play a sound when the botcheck comes up. Also plays sound when running out of mana.
-// @match        http://amar.bornofsnails.net
+// @author       Kateus, Dangazzm, & Daniel Fanjul Alcutén
+// @match        http://amar.bornofsnails.net/*
 // @grant        none
 // ==/UserScript==
 /* jshint -W097 */
 'use strict';
 
-function playCustomSound()
+function playBotcheckSound()
 {
     var customAudio = new Audio("http://amar.brooksmcmillin.com/sound.mp3");
     customAudio.play();
 }
 
-var onStartActionOriginal = Utils.onStartAction;
+Utils.onStartActionOriginal = Utils.onStartAction;
 
 Utils.onStartAction = function(data)
 {
-    onStartActionOriginal(data);
+    console.log(data);
+    Utils.onStartActionOriginal(data);
     
     if(data["botcheck"]){
-        playCustomSound();
+        playBotcheckSound();
     } else if (data.custom){
-        playCustomSound();
+        playBotcheckSound();
     } else if (data.message && data.message.indexOf("You need mana to continue.") > -1){
-        playCustomSound();
+        playBotcheckSound();
     } else if (data.message && data.message.indexOf("You reached your action limit.") > -1){
-        playCustomSound();
+        playBotcheckSound();
     }
 }
+
+// Combat botchecks
+Combat.getBotcheckOriginal = Combat.getBotcheck;
+
+Combat.getBotcheck = function()
+{
+    Combat.getBotcheckOriginal();
+    playBotcheckSound();
+}
+
+console.log("Botcheck Sound Loaded.");
